@@ -1,3 +1,13 @@
+import { json, LoaderFunction } from "@remix-run/node"
+import { authenticator } from "~/services/auth.server"
+
+export const loader: LoaderFunction = async ({ request }) => {
+  let user = await authenticator.isAuthenticated(request)
+  console.log({
+    user
+  })
+  return json({})
+}
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
@@ -28,5 +38,5 @@ export default function Index() {
         </li>
       </ul>
     </div>
-  );
+  )
 }
